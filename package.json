@@ -1,0 +1,35 @@
+{
+  "name": "env-validator",
+  "version": "1.0.0",
+  "description": "A lightweight environment variable validator for Node.js applications",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "validator",
+    "dotenv",
+    "nodejs",
+    "validation"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
