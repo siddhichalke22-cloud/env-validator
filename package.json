@@ -24,7 +24,7 @@
     "nodejs",
     "validation"
   ],
-  "author": "Your Name",
+  "author": "Siddhi Chalke",
   "license": "MIT",
   "engines": {
     "node": ">=18"
