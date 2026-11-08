@@ -9,13 +9,13 @@ A lightweight environment variable validator for Node.js applications.
 ## Installation
 
 ```sh
-npm install env-validator
+npm install env-validator-siddhichalke22-cloud
 ```
 
 ## Usage
 
 ```js
-const { validateEnv } = require("env-validator");
+const { validateEnv } = require("env-validator-siddhichalke22-cloud");
 
 const config = validateEnv({
   PORT: { type: "number", required: true },
