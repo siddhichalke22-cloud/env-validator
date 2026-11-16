@@ -1,7 +1,7 @@
-# env-validator
+# safe-env-validator
 
 Validate and convert your Node.js application's environment variables before
-the application starts. `env-validator` has no runtime dependencies and uses
+the application starts. `safe-env-validator` has no runtime dependencies and uses
 Node.js's built-in `URL` API.
 
 ## Features
@@ -22,7 +22,7 @@ Node.js 18 or later.
 ## Installation
 
 ```sh
-npm install env-validator
+npm install safe-env-validator
 ```
 
 If you want to load a `.env` file, install and configure [dotenv](https://www.npmjs.com/package/dotenv) separately:
@@ -31,7 +31,7 @@ If you want to load a `.env` file, install and configure [dotenv](https://www.np
 npm install dotenv
 ```
 
-`env-validator` reads from `process.env`; it does not load files or modify
+`safe-env-validator` reads from `process.env`; it does not load files or modify
 `process.env` itself.
 
 ## Quick start
@@ -41,7 +41,7 @@ CommonJS:
 ```js
 require("dotenv").config();
 
-const { validateEnv } = require("env-validator");
+const { validateEnv } = require("safe-env-validator");
 
 const env = validateEnv({
   PORT: { type: "number", required: true },
@@ -57,7 +57,7 @@ ES modules:
 
 ```js
 import "dotenv/config";
-import { validateEnv } from "env-validator";
+import { validateEnv } from "safe-env-validator";
 
 const env = validateEnv({
   PORT: { type: "number", required: true },
@@ -155,7 +155,7 @@ throw `TypeError` immediately.
 const {
   validateEnv,
   EnvironmentValidationError
-} = require("env-validator");
+} = require("safe-env-validator");
 
 try {
   validateEnv({ PORT: { type: "number", required: true } });
@@ -212,14 +212,14 @@ To try the package through a local npm installation:
 
 ```sh
 npm pack
-mkdir /tmp/env-validator-check
-cd /tmp/env-validator-check
-npm install /path/to/env-validator/env-validator-1.0.0.tgz
-node -e 'console.log(require("env-validator").validateEnv({ NODE_ENV: { default: "development" } }))'
+mkdir /tmp/safe-env-validator-check
+cd /tmp/safe-env-validator-check
+npm install /path/to/env-validator/safe-env-validator-1.0.1.tgz
+node -e 'console.log(require("safe-env-validator").validateEnv({ NODE_ENV: { default: "development" } }))'
 ```
 
 To verify ES module imports, use a `.mjs` file or run Node with
-`--input-type=module` and `import { validateEnv } from "env-validator"`.
+`--input-type=module` and `import { validateEnv } from "safe-env-validator"`.
 
 ## Contributing
 

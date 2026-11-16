@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { validateEnv } = require("env-validator");
+const { validateEnv } = require("safe-env-validator");
 
 const env = validateEnv(
   {

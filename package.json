@@ -1,6 +1,6 @@
 {
-  "name": "env-validator",
-  "version": "1.0.0",
+  "name": "safe-env-validator",
+  "version": "1.0.1",
   "description": "Validate and convert Node.js environment variables before your application starts",
   "main": "src/index.js",
   "module": "src/index.mjs",

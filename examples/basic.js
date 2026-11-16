@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { validateEnv } = require("env-validator");
+const { validateEnv } = require("safe-env-validator");
 
 const env = validateEnv({
   PORT: { type: "number", required: true, min: 1, max: 65535 },
