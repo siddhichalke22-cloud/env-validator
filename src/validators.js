@@ -49,11 +49,8 @@ function parseUrl(value) {
 
   try {
     new URL(value);
-  } catch (error) {
-    if (error instanceof TypeError) {
-      throw new TypeError("Expected URL but received an invalid value");
-    }
-    throw error;
+  } catch {
+    throw new TypeError("Expected URL but received an invalid value");
   }
 
   return value;
