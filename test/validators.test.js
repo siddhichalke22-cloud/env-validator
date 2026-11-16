@@ -1,3 +1,5 @@
+const assert = require("node:assert/strict");
+const { test } = require("node:test");
 const {
   parseString,
   parseNumber,
@@ -5,28 +7,26 @@ const {
   parseUrl
 } = require("../src/validators");
 
-describe("type validators", () => {
-  test("validates strings", () => {
-    expect(parseString("value")).toBe("value");
-    expect(() => parseString(1)).toThrow("Expected string");
-  });
+test("validates strings", () => {
+    assert.equal(parseString("value"), "value");
+    assert.throws(() => parseString(1), /Expected string/);
+});
 
-  test("converts finite numeric strings and rejects invalid values", () => {
-    expect(parseNumber("3000")).toBe(3000);
-    expect(parseNumber(4)).toBe(4);
-    expect(() => parseNumber("")).toThrow("empty value");
-    expect(() => parseNumber("NaN")).toThrow("invalid value");
-    expect(() => parseNumber("Infinity")).toThrow("invalid value");
-  });
+test("converts finite numeric strings and rejects invalid values", () => {
+    assert.equal(parseNumber("3000"), 3000);
+    assert.equal(parseNumber(4), 4);
+    assert.throws(() => parseNumber(""), /empty value/);
+    assert.throws(() => parseNumber("NaN"), /invalid value/);
+    assert.throws(() => parseNumber("Infinity"), /invalid value/);
+});
 
-  test("accepts only true and false for booleans", () => {
-    expect(parseBoolean("true")).toBe(true);
-    expect(parseBoolean("FALSE")).toBe(false);
-    expect(() => parseBoolean("1")).toThrow("neither");
-  });
+test("accepts only true and false for booleans", () => {
+    assert.equal(parseBoolean("true"), true);
+    assert.equal(parseBoolean("FALSE"), false);
+    assert.throws(() => parseBoolean("1"), /neither/);
+});
 
-  test("validates absolute URLs", () => {
-    expect(parseUrl("https://example.com")).toBe("https://example.com");
-    expect(() => parseUrl("/relative/path")).toThrow("invalid value");
-  });
+test("validates absolute URLs", () => {
+    assert.equal(parseUrl("https://example.com"), "https://example.com");
+    assert.throws(() => parseUrl("/relative/path"), /invalid value/);
 });

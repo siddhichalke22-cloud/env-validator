@@ -129,21 +129,6 @@ function validateValue(name, value, rules, type) {
   if (rules.enum !== undefined && !rules.enum.includes(parsed)) {
     throw new TypeError(`Expected one of: ${rules.enum.map(String).join(", ")}`);
   }
-  if (rules.validate !== undefined) {
-    const result = rules.validate(parsed);
-    if (result !== true) {
-      if (typeof result === "string" && result.length > 0) {
-        throw new TypeError(result);
-      }
-      if (result !== false) {
-        throw new TypeError(
-          `Custom validation for ${name} must return true, false, or an error message`
-        );
-      }
-      throw new TypeError("Custom validation failed");
-    }
-  }
-
   return parsed;
 }
 
@@ -197,14 +182,9 @@ function validateEnv(schema, options = {}) {
       continue;
     }
 
+    let value;
     try {
-      const value = validateValue(name, rawValue, rules, type);
-      Object.defineProperty(validated, name, {
-        configurable: true,
-        enumerable: true,
-        value,
-        writable: true
-      });
+      value = validateValue(name, rawValue, rules, type);
     } catch (error) {
       if (!(error instanceof TypeError)) {
         throw error;
@@ -214,7 +194,31 @@ function validateEnv(schema, options = {}) {
         name,
         message: rules.message || error.message
       });
+      continue;
     }
+
+    if (rules.validate !== undefined) {
+      const result = rules.validate(value);
+      if (result !== true) {
+        let message = "Custom validation failed";
+        if (typeof result === "string" && result.length > 0) {
+          message = result;
+        } else if (result !== false) {
+          throw new TypeError(
+            `Custom validation for ${name} must return true, false, or an error message`
+          );
+        }
+        errors.push({ name, message: rules.message || message });
+        continue;
+      }
+    }
+
+    Object.defineProperty(validated, name, {
+      configurable: true,
+      enumerable: true,
+      value,
+      writable: true
+    });
   }
 
   if (options.strict) {

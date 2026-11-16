@@ -28,8 +28,7 @@
     "dotenv",
     "nodejs",
     "validation",
-    "configuration",
-    "dotenv"
+    "configuration"
   ],
   "author": "Siddhi Chalke",
   "license": "MIT",
