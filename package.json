@@ -1,19 +1,25 @@
 {
-  "name": "env-validator-siddhichalke22-cloud",
+  "name": "env-validator",
   "version": "1.0.0",
-  "description": "A lightweight environment variable validator for Node.js applications",
+  "description": "Validate and convert Node.js environment variables before your application starts",
   "main": "src/index.js",
+  "module": "src/index.mjs",
   "type": "commonjs",
   "exports": {
-    ".": "./src/index.js"
+    ".": {
+      "import": "./src/index.mjs",
+      "require": "./src/index.js"
+    }
   },
   "files": [
     "src",
+    "examples",
+    "index.js",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:watch": "jest --watch"
   },
   "keywords": [
@@ -22,7 +28,9 @@
     "validator",
     "dotenv",
     "nodejs",
-    "validation"
+    "validation",
+    "configuration",
+    "dotenv"
   ],
   "author": "Siddhi Chalke",
   "license": "MIT",

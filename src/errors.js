@@ -1,8 +1,13 @@
 class EnvironmentValidationError extends Error {
-  constructor(message, variable) {
-    super(message);
+  constructor(errors) {
+    const details = errors.map(({ name, message }) => `- ${name}: ${message}`);
+    super(
+      `❌ Environment Validation Failed!\n\n${details.join("\n")}\nPlease check your .env file.`
+    );
+
     this.name = "EnvironmentValidationError";
-    this.variable = variable;
+    this.errors = errors;
+    this.variable = errors[0]?.name;
   }
 }
 
